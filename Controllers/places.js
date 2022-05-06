@@ -1,0 +1,11 @@
+// create and export express.Router()
+
+const router = require('express').Router()
+
+
+//make a first route in places.js
+router.get('/', (req, res) => {
+    res.send('GET /places')
+})
+
+module.exports = router
