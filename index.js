@@ -1,26 +1,18 @@
-require('dotenv').config()
+require("dotenv").config();
+const express = require("express");
+const app = express();
 
-//require express
-const express = require('express')
-const app = express()
+app.set("view engine", "jsx");
+app.engine("jsx", require("express-react-views").createEngine());
 
-//importing the router from places.js
-app.use ('/places', require('./Controllers/places'))
+app.use("/places", require("./controllers/places"));
 
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
-app.get('/', (req, res) => {
-    res.send('Hello world!')
-})
+app.get("*", (req, res) => {
+  res.render("error404");
+});
 
-// make another route to homepage route with path set to wildcard operator. route must be at bottom otherwise it will override other pages
-// have 404 page route legitimately return a statud code 404. do this by calling .status(404) on response. can chain this together with .send()
-app.get('*', (req, res) => {
-    res.status(404).send('<h1>404 Page</h1>')
-})
-
-app.listen(process.env.PORT)
-
-
-
-
-
+app.listen(process.env.PORT);
