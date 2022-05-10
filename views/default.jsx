@@ -1,13 +1,8 @@
 //Import React
   const React = require('react')
 
-  // sub function called Def that has one parameter called html
-  function Def (html) {}
-  
-  //export the Def function i just created
-  module.exports = Def
-  
   //fill Def function with a return statement that includes the HTML skeleton of all the pages im going to include 
+// sub function called Def that has one parameter called html
   function Def (html) {
     return (
         <html>
@@ -20,4 +15,11 @@
         </html>
     )
   }
+
+  
+
+  //export the Def function i just created
+  module.exports = Def
+  
+ 
   
