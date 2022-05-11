@@ -2,10 +2,9 @@
 const router = require("express").Router();
 
 //router
-router.get('/new', (req, res) => {
-  res.render('places/new')
-})
-
+router.get("/new", (req, res) => {
+  res.render("places/new");
+});
 
 // GET /places
 router.get("/", (req, res) => {
@@ -15,14 +14,14 @@ router.get("/", (req, res) => {
       city: "Seattle",
       state: "WA",
       cuisines: "Thai, Pan-Asian",
-      pic: "http://placekitten.com/250/250",
+      pic: "public/Images/hhh13-tEMU4lzAL0w-unsplash.jpg",
     },
     {
       name: "Coding Cat Cafe",
       city: "Phoenix",
       state: "AZ",
       cuisines: "Coffee, Bakery",
-      pic: "http://placekitten.com/250/250",
+      pic: "public/Images/brooke-lark-of0pMsWApZE-unsplash.jpg",
     },
   ];
   res.render("places/index", { places });
