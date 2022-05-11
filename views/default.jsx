@@ -3,7 +3,7 @@
 
   //fill Def function with a return statement that includes the HTML skeleton of all the pages im going to include 
 // sub function called Def that has one parameter called html
-  function Def (html) {
+  function Def(html) {
     return (
         <html>
             <head>

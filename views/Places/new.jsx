@@ -37,12 +37,6 @@ function new_form () { // create a return statement in the new form function and
   </div>
   <input className="btn btn-primary" type="submit" value="Add Place" />
 </form>
-
-
-
-
-
-
     </main>
   </Def>
     )
