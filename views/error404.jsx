@@ -9,9 +9,9 @@ function error404() {
               <p>Oops, sorry, we can't find this page!</p>
               <div>
               <img
-               src="public/Images/hhh13-tEMU4lzAL0w-unsplash.jpg" alt="sad cat" />
+               src="/Images/hhh13-tEMU4lzAL0w-unsplash.jpg" alt="sad cat" />
             <div>
-        Photo by <a href="AUTHOR_LINK">傅甬 华</a> on <a href="https://unsplash.com/photos/tEMU4lzAL0w">Unsplash</a>
+        Photo by <a href="https://unsplash.com/@hhh13">傅甬 华</a> on <a href="https://unsplash.com/photos/tEMU4lzAL0w">Unsplash</a>
       </div>
     </div>
           </main>

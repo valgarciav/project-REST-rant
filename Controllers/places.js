@@ -48,4 +48,29 @@ router.post("/", (req, res) => {
   res.redirect("/places");
 });
 
+//SHOW
+//In order to use it this way, we will need to cast req.params.id to a number. If it is not a number, we will want to render the 404 error page. We can check if something is not a number by using the built-in function isNaN().
+//You will need to parse the array index from req.params.id like we did earlier. Render the error page if you run into any bad data.
+//Change your delete route to actually delete the item from the array. We can do this with the built-in array splice() method.
+//Redirect your user to the index page.
+
+router.delete('/places/:id', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+    res.render('error404')
+  }
+  else if (!places[id]) {
+    res.render('error404')
+  }
+  else {
+    places.splice(id, 1)
+    res.redirect('/places')
+  }
+})
+
+
+
+
+//pass data in places [id]
+
 module.exports = router;

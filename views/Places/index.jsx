@@ -1,21 +1,30 @@
 const React = require('react')
 const Def = require('../default')
 
+
+//click a link and reach the show page directly
+//Use the array index as a variable for the id we added to the href attribute. We can reach the index by adding a parameter to the callback function and then focusing on the placesFormatted array.
+
 function index(data) {
-  let placesFormatted = data.places.map((place) => {
+  let placesFormatted = data.places.map((place, index) => {
     return (
       <div className="col-sm-6">
-        <h2>{place.name}</h2>
-        <p clasName="text-center">
+        <h2>
+          <a href={`/places/${index}`} >
+            {place.name}
+          </a>
+        </h2>
+        <p className="text-center">
           {place.cuisines}
         </p>
         <img src={place.pic} alt={place.name} />
-        <p clasName="text-center">
+        <p className="text-center">
           Located in {place.city}, {place.state}
         </p>
       </div>
     )
   })
+  
   
     return (
       <Def>
