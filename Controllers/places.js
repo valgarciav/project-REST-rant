@@ -8,7 +8,7 @@ router.get("/new", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  res.render("places/index", { places });
+res.render("places/index", { places });
 });
 
 // GET /places
@@ -30,8 +30,9 @@ router.get("/", (req, res) => {
     },
   ];
   res.render("places/index", { places });
-});
+}); 
 
+//POST
 router.post("/", (req, res) => {
   console.log(req.body);
   if (!req.body.pic) {
@@ -48,12 +49,27 @@ router.post("/", (req, res) => {
   res.redirect("/places");
 });
 
+//EDIT
+router.get('/:id/edit', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+      res.render('error404')
+  }
+  else if (!places[id]) {
+      res.render('error404')
+  }
+  else {
+    res.render('places/edit', { place: places[id] })
+  }
+})
+
 //SHOW
 //In order to use it this way, we will need to cast req.params.id to a number. If it is not a number, we will want to render the 404 error page. We can check if something is not a number by using the built-in function isNaN().
 //You will need to parse the array index from req.params.id like we did earlier. Render the error page if you run into any bad data.
 //Change your delete route to actually delete the item from the array. We can do this with the built-in array splice() method.
 //Redirect your user to the index page.
 
+//DELETE
 router.delete('/places/:id', (req, res) => {
   let id = Number(req.params.id)
   if (isNaN(id)) {

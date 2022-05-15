@@ -3,8 +3,8 @@ const React = require('react')
 const Def = require('../default')
 
 //require statements. define funcion called new form and export it
-function new_form () { // create a return statement in the new form function and then use the def component as a wrapper
-    return ( // inside def component add HTML including main tag and h1 tag
+function new_form() { // create a return statement in the new form function and then use the def component as a wrapper
+    return( // inside def component add HTML including main tag and h1 tag
     // from data needs to go to the POST/places route. 
     //the div is so that each form field will live on a separate line. include label and input
     //Let's update the label and input with specific information. The most important part to remember is the name attribute of the input tag. This is important because it will be the variable name we end up using on the back-end later. Less critical, but still important, is to make a for attribute on the label that corresponds to an id attribute on the input. That is for accessibility/screen readers
@@ -14,28 +14,35 @@ function new_form () { // create a return statement in the new form function and
     <Def>
     <main>
       <h1>Add a New Place</h1>
-      <form method="POST" action="/places">
-  <div className="form-group">
+      <form method="POST" action="/Places">
+  <div 
+  className="form-group">
     <label htmlFor="name">Place Name</label>
-    <input className="form-control" id="name" name="name" required />
+    <input 
+    className="form-control" id="name" name="name" required />
   </div>
-  <div className="form-group">
+  <div 
+  className="form-group">
     <label htmlFor="pic">Place Picture</label>
-    <input className="form-control" id="pic" name="pic" />
+    <input className="form-control" id="pic" name="pic"/>
   </div>
-  <div className="form-group">
+  <div 
+  className="form-group">
     <label htmlFor="city">City</label>
-    <input className="form-control" id="city" name="city" />
+    <input className="form-control" id="city" name="city"/>
   </div>
-  <div className="form-group">
+  <div 
+  className="form-group">
     <label htmlFor="state">State</label>
-    <input className="form-control" id="state" name="state" />
+    <input className="form-control" id="state" name="state"/>
   </div>
-  <div className="form-group">
+  <div 
+  className="form-group">
     <label htmlFor="cuisines">Cuisines</label>
-    <input className="form-control" id="cuisines" name="cuisines" required />
+    <input className="form-control" id="cuisines" name="cuisines" required/>
   </div>
-  <input className="btn btn-primary" type="submit" value="Add Place" />
+  <input 
+  className="btn btn-primary" type="submit" value="Add Place"/>
 </form>
     </main>
   </Def>
@@ -43,6 +50,8 @@ function new_form () { // create a return statement in the new form function and
 }
 //create a submit button, can use input or a button. type attribute is set to submit. do not use button type
 //require name and cuisines fields required
+
+
 module.exports = new_form
 
 
