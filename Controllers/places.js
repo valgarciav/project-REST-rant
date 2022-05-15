@@ -1,17 +1,17 @@
 // create and export express.Router()
 const router = require("express").Router();
-const places = require("../models/places");
+const places = require("../models/places.js");
 
 //router
 router.get("/new", (req, res) => {
-  res.render("places/new");
+  res.render("/places/new");
 });
 
 router.get("/", (req, res) => {
   res.render("places/index", { places });
 });
 
-// GET /places
+/*// GET /places
 router.get("/", (req, res) => {
   let places = [
     {
@@ -30,8 +30,35 @@ router.get("/", (req, res) => {
     },
   ];
   res.render("places/index", { places });
+});*/
+
+//EDIT
+router.put("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    // Dig into req.body and make sure data is valid
+    if (!req.body.pic) {
+      // Default image if one is not provided
+      req.body.pic = "http://placekitten.com/400/400";
+    }
+    if (!req.body.city) {
+      req.body.city = "Anytown";
+    }
+    if (!req.body.state) {
+      req.body.state = "USA";
+    }
+
+    // Save the new data into places[id]
+    places[id] = req.body;
+    res.redirect(`/places/${id}`);
+  }
 });
 
+//POST
 router.post("/", (req, res) => {
   console.log(req.body);
   if (!req.body.pic) {
@@ -54,22 +81,18 @@ router.post("/", (req, res) => {
 //Change your delete route to actually delete the item from the array. We can do this with the built-in array splice() method.
 //Redirect your user to the index page.
 
-router.delete('/places/:id', (req, res) => {
-  let id = Number(req.params.id)
+//DELETE
+router.delete("/places/:id", (req, res) => {
+  let id = Number(req.params.id);
   if (isNaN(id)) {
-    res.render('error404')
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    places.splice(id, 1);
+    res.redirect("/places");
   }
-  else if (!places[id]) {
-    res.render('error404')
-  }
-  else {
-    places.splice(id, 1)
-    res.redirect('/places')
-  }
-})
-
-
-
+});
 
 //pass data in places [id]
 
