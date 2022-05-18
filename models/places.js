@@ -1,16 +1,13 @@
-module.exports = [
-  {
-    name: "H-Thai-ML",
-    city: "Seattle",
-    state: "WA",
-    cuisines: "Thai, Pan-Asian",
-    pic: "/Images/taylor-kiser-6RJct18G_3I-unsplash.jpg",
-  },
-  {
-    name: "Coding Cat Cafe",
-    city: "Phoenix",
-    state: "AZ",
-    cuisines: "Coffee, Bakery",
-    pic: "/Images/brooke-lark-of0pMsWApZE-unsplash.jpg",
-  },
-];
+//Require Mongoose at the top of the file. Then, declare a new Schema for defining a place. We will create an instance of a class, a Mongoose schema.
+const mongoose = require('mongoose')
+
+const placeSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  pic: String,
+  cuisines: { type: String, required: true },
+  city: { type: String, default: 'Anytown' },
+  state: { type: String, default: 'USA' },
+  founded: Number
+})
+
+module.exports = mongoose.model('Place', placeSchema)

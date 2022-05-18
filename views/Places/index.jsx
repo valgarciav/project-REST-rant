@@ -5,11 +5,11 @@ const Def = require("../default");
 //Use the array index as a variable for the id we added to the href attribute. We can reach the index by adding a parameter to the callback function and then focusing on the placesFormatted array.
 
 function index(data) {
-  let placesFormatted = data.places.map((place, index) => {
+  let placesFormatted = data.places.map((place) => {
     return (
       <div className="col-sm-6">
         <h2>
-          <a href={`/places/${index}`}>{place.name}</a>
+          <a href={`/places/${place.id}`}>{place.name}</a>
         </h2>
         <p className="text-center">{place.cuisines}</p>
         <img src={place.pic} alt={place.name} />
