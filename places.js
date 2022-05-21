@@ -1,10 +1,10 @@
 // create and export express.Router()
 const router = require("express").Router();
-const places = require("../models/places");
+const places = require("./models/places");
 
 //router
 router.get("/", (req, res) => {
-  res.render("places/index", { places });
+  res.render("Places/index", { places });
 });
 
 //POST

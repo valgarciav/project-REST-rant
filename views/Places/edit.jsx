@@ -1,5 +1,5 @@
 const React = require("react");
-const Def = require("../default.jsx");
+const Def = require("../default");
 
 //to access the place data passed in from the route. add a parameter to the edit_form function to accept the data
 //change action attribute of the from tag/ new action shoul reference the PUT method in query string
