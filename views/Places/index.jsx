@@ -8,9 +8,9 @@ function index(data) {
         <h2>
           <a href={`/places/${place.id}`}>{place.name}</a>
         </h2>
-        <p>{place.cuisines}</p>
+        <p className="text-center">{place.cuisines}</p>
         <img src={place.pic} alt={place.name} />
-        <p>
+        <p className="text-center">
           Located in {place.city}, {place.state}
         </p>
       </div>
@@ -19,8 +19,7 @@ function index(data) {
   return (
     <Def>
       <main>
-        <h1>PLACES INDEX PAGE</h1>
-        <p>Rant about your favorite (or not favorite) places!</p>
+        <h1>Places to Rant or Rave About</h1>
         <div className="row">{placesFormatted}</div>
       </main>
     </Def>
