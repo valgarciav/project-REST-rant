@@ -36,5 +36,3 @@ function Def(html) {
 
 //export the Def function i just created
 module.exports = Def;
-
-
