@@ -18,11 +18,6 @@ router.get("/new", (req, res) => {
   res.render("places/new");
 });
 
-// DELETE
-router.delete("/:id", (req, res) => {
-  res.send("DELETE /places/:id stub");
-});
-
 // CREATE
 router.post("/", (req, res) => {
   db.Place.create(req.body)
@@ -55,6 +50,11 @@ router.get("/:id", (req, res) => {
       console.log("err", err);
       res.render("error404");
     });
+});
+
+// DELETE
+router.delete("/:id", (req, res) => {
+  res.send("DELETE /places/:id stub");
 });
 
 module.exports = router;

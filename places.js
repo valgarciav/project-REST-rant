@@ -4,7 +4,7 @@ const places = require("./models/places");
 
 //router
 router.get("/", (req, res) => {
-  res.render("Places/index", { places });
+  res.render("places/index", { places });
 });
 
 //POST
