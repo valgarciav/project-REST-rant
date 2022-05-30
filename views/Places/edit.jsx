@@ -21,7 +21,7 @@ function edit_form(data) {
                 required
               ></input>
             </div>
-            <div className="fform-group col-sm-6">
+            <div className="form-group col-sm-6">
               <label htmlFor="pic">Place Picture</label>
               <input
                 className="form-control"
@@ -32,7 +32,7 @@ function edit_form(data) {
             </div>
           </div>
           <div className="row"></div>
-          <div className="fform-group col-sm-4">
+          <div className="form-group col-sm-4">
             <label htmlFor="city">City</label>
             <input
               className="form-control"
@@ -60,6 +60,15 @@ function edit_form(data) {
               required
             ></input>
           </div>
+          <div className="form-group col-sm-4">
+            <label htmlFor="founded">Founded</label>
+            <input
+              className="form-control"
+              id="founded"
+              name="founded"
+              value={data.place.founded}
+            />
+          </div>
           <input
             className="btn btn-primary"
             type="submit"
@@ -72,3 +81,28 @@ function edit_form(data) {
 }
 
 module.exports = edit_form;
+
+
+
+/**
+ * 
+ * 
+
+const React = require('react')
+const Def = require('../default.jsx')
+
+function edit_form (data) {
+    return (
+        <Def>
+          ...
+        </Def>
+    )
+}
+
+module.exports = edit_form
+
+
+
+ * 
+ * 
+ */
