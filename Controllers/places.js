@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   city: 'Phoenix',
   state: 'AZ',
   cuisines: 'Coffee, Bakery',
-  pic: 'http://placekitten.com/250/250'
+  pic: 'http://placekitten.com/250/250'ç
 }]
 ]
   res.render('places/index', { places })
