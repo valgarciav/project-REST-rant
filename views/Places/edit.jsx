@@ -71,8 +71,8 @@ function edit_form(data) {
           </div>
           <input
             className="btn btn-primary"
-            type="submit"
-            value="Submit Changes"
+            type="Submit"
+            value="Update Place"
           ></input>
         </form>
       </main>
