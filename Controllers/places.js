@@ -1,99 +1,224 @@
-// create and export express.Router()
 const router = require("express").Router();
-const places = require("../models/places.js");
+const db = require("../models");
 
-//router
-router.get("/new", (req, res) => {
-  res.render("/places/new");
+// INDEX - shows a list of all pages
+router.get("/", (req, res) => {
+  db.Place.find()
+    .then((places) => {
+      res.render("Places/index", { places });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("error404");
+    });
 });
 
-router.get("/", (req, res) => {
-  res.render("places/index", { places });
-});
+/*
+const router = require('express').Router()
+const places = require('../models/places.js')
 
-/*// GET /places
-router.get("/", (req, res) => {
-  let places = [
-    {
-      name: "H-Thai-ML",
-      city: "Seattle",
-      state: "WA",
-      cuisines: "Thai, Pan-Asian",
-      pic: "public/Images/hhh13-tEMU4lzAL0w-unsplash.jpg",
-    },
-    {
-      name: "Coding Cat Cafe",
-      city: "Phoenix",
-      state: "AZ",
-      cuisines: "Coffee, Bakery",
-      pic: "public/Images/brooke-lark-of0pMsWApZE-unsplash.jpg",
-    },
-  ];
-  res.render("places/index", { places });
-});*/
+// GET /places
+app.get('/', (req, res) => {
+  let places = [let places = [{
+  name: 'H-Thai-ML',
+  city: 'Seattle',
+  state: 'WA',
+  cuisines: 'Thai, Pan-Asian',
+  pic: 'http://placekitten.com/250/250'
+}, {
+  name: 'Coding Cat Cafe',
+  city: 'Phoenix',
+  state: 'AZ',
+  cuisines: 'Coffee, Bakery',
+  pic: 'http://placekitten.com/250/250'ç
+}]
+]
+  res.render('places/index', { places })
 
-//EDIT
-router.put("/:id", (req, res) => {
-  let id = Number(req.params.id);
+})
+
+// NEW route - needs to be above get/places:id
+router.get('/new', (req, res) => {
+  res.render('places/new')
+})
+
+// new show page
+router.get('/:id', (req, res) => {
+  let id = Number(req.params.id)
   if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    // Dig into req.body and make sure data is valid
-    if (!req.body.pic) {
-      // Default image if one is not provided
-      req.body.pic = "http://placekitten.com/400/400";
-    }
-    if (!req.body.city) {
-      req.body.city = "Anytown";
-    }
-    if (!req.body.state) {
-      req.body.state = "USA";
-    }
-
-    // Save the new data into places[id]
-    places[id] = req.body;
-    res.redirect(`/places/${id}`);
+    res.render('error404')
   }
-});
+  else if (!places[id]) {
+    res.render('error404')
+  }
+  else {
+    res.render('places/show', { place: places[id], id })
+  }
+})
 
-//POST
-router.post("/", (req, res) => {
-  console.log(req.body);
+// EDIT
+router.get('/:id/edit', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+      res.render('error404')
+  }
+  else if (!places[id]) {
+      res.render('error404')
+  }
+  else {
+    res.render('places/edit', { place: places[id] })
+  }
+})
+
+
+
+
+// POST ROUTE
+router.post('/', (req, res) => {
   if (!req.body.pic) {
     // Default image if one is not provided
-    req.body.pic = "http://placekitten.com/400/400";
+    req.body.pic = 'http://placekitten.com/400/400'
   }
   if (!req.body.city) {
-    req.body.city = "Anytown";
+    req.body.city = 'Anytown'
   }
   if (!req.body.state) {
-    req.body.state = "USA";
+    req.body.state = 'USA'
   }
-  places.push(req.body);
-  res.redirect("/places");
-});
+  places.push(req.body)
+  res.redirect('/places')
+})
 
-//SHOW
-//In order to use it this way, we will need to cast req.params.id to a number. If it is not a number, we will want to render the 404 error page. We can check if something is not a number by using the built-in function isNaN().
-//You will need to parse the array index from req.params.id like we did earlier. Render the error page if you run into any bad data.
-//Change your delete route to actually delete the item from the array. We can do this with the built-in array splice() method.
-//Redirect your user to the index page.
-
-//DELETE
-router.delete("/places/:id", (req, res) => {
-  let id = Number(req.params.id);
+//DELETE 
+router.delete('/places/:id', (req, res) => {
+  let id = Number(req.params.id)
   if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    places.splice(id, 1);
-    res.redirect("/places");
+    res.render('error404')
   }
+  else if (!places[id]) {
+    res.render('error404')
+  }
+  else {
+    places.splice(id, 1)
+    res.redirect('/places')
+  }
+})
+
+*/
+
+// CREATE
+router.post("/", (req, res) => {
+  db.Place.create(req.body)
+    .then(() => {
+      res.redirect("/places");
+    })
+    .catch((err) => {
+      if (err && err.name == "ValidationError") {
+        let message = "Validation Error: ";
+        for (var field in err.errors) {
+          message += `${field} was ${err.errors[field].value}. `;
+          message += `${err.errors[field].message}`;
+        }
+        console.log("Validation error message", message);
+        res.render("places/new", { message });
+      } else {
+        res.render("error404");
+      }
+    });
 });
 
-//pass data in places [id]
+// NEW
+router.get("/new", (req, res) => {
+  res.render("places/new");
+});
 
+// SHOW
+router.get("/:id", (req, res) => {
+  db.Place.findById(req.params.id)
+    .populate("comments")
+    .then((place) => {
+      console.log(place.comments);
+      res.render("places/show", { place });
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
+});
+
+// GET EDIT FORM
+router.get("/:id/edit", (req, res) => {
+  db.Place.findById(req.params.id)
+    .then((place) => {
+      res.render("places/edit", { place });
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
+});
+
+// PUT EDITS
+router.put("/:id", (req, res) => {
+  db.Place.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+      res.redirect(`/places/${req.params.id}`);
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
+});
+
+// post comments
+router.post("/:id/comment", (req, res) => {
+  console.log("post comment", req.body);
+  if (req.body.author === "") {
+    req.body.author = undefined;
+  }
+  req.body.rant = req.body.rant ? true : false;
+  db.Place.findById(req.params.id)
+    .then((places) => {
+      db.Comment.create(req.body)
+        .then((comment) => {
+          places.comments.push(comment.id);
+          places
+            .save()
+            .then(() => {
+              res.redirect(`/places/${req.params.id}`);
+            })
+            .catch((err) => {
+              res.render("error404");
+            });
+        })
+        .catch((err) => {
+          res.render("error404");
+        });
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
+});
+
+// DELETE
+router.delete("/:id", (req, res) => {
+  db.Place.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect("/places");
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
+});
+
+//delete comment from place
+router.delete("/:id/comment/:commentId", (req, res) => {
+  db.Comment.findByIdAndDelete(req.params.commentId)
+    .then(() => {
+      console.log("Success");
+      res.redirect(`/places/${req.params.id}`);
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
+});
 module.exports = router;
